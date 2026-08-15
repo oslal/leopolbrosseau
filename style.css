@@ -1,0 +1,243 @@
+/* ------------------------------------------------------------------
+   leopolbrosseau.ca
+   Grille à deux colonnes : liste fixe à gauche, images à droite.
+   Une seule taille de corps pour toute l'interface.
+   ------------------------------------------------------------------ */
+
+@font-face {
+	font-family: "Inter";
+	src: url("/assets/fonts/InterVariable.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--base: 17px;
+	--gap: 1rem;
+	--colonne: 25%;
+	--fg: rgba(0, 0, 0, 0.85);
+	--fg-faible: rgba(0, 0, 0, 0.4);
+	--fond-image: rgba(0, 0, 0, 0.04);
+	--bg: #ffffff;
+	--courbe: cubic-bezier(0.45, 0.05, 0.33, 1);
+}
+
+* { box-sizing: border-box; }
+
+html {
+	font-size: var(--base);
+	background: var(--bg);
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--fg);
+	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+	font-size: 1.05rem;
+	font-weight: 550;
+	line-height: 1.2;
+	letter-spacing: -0.015em;
+	font-feature-settings: "cv05" 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover { opacity: 0.5; }
+a:active { opacity: 0.7; }
+
+a:focus-visible {
+	outline: 1px solid var(--fg);
+	outline-offset: 2px;
+}
+
+img {
+	display: block;
+	width: 100%;
+	height: auto;
+	background: var(--fond-image);
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+p { margin: 0 0 1.2em 0; }
+p:last-child { margin-bottom: 0; }
+
+/* --- ossature ----------------------------------------------------- */
+
+.page {
+	display: grid;
+	grid-template-columns: var(--colonne) 1fr;
+	gap: var(--gap);
+	align-items: start;
+	padding: 0.9rem 1rem 1rem;
+	min-height: 100vh;
+	transition: opacity 200ms var(--courbe);
+}
+
+.barre {
+	position: sticky;
+	top: 0.9rem;
+}
+
+.bloc + .bloc { margin-top: 1.2em; }
+
+.barre a.actif {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+}
+
+.pied {
+	position: fixed;
+	left: 1rem;
+	bottom: 1rem;
+	color: var(--fg);
+}
+
+/* --- index -------------------------------------------------------- */
+
+.grille {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--gap);
+}
+
+/* Recadrage uniforme des vignettes. Retirer aspect-ratio et object-fit
+   pour laisser chaque vignette à ses proportions d'origine.            */
+.vignette img {
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+}
+
+/* --- page de série ------------------------------------------------ */
+
+.entete {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--gap);
+	margin-bottom: var(--gap);
+}
+
+.entete-meta {
+	display: flex;
+	justify-content: space-between;
+	gap: var(--gap);
+}
+
+.pile {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap);
+}
+
+.note {
+	grid-column: 1 / -1;
+	color: var(--fg-faible);
+	max-width: 34em;
+}
+
+/* --- calque informations ------------------------------------------ */
+
+#informations {
+	position: fixed;
+	inset: 0;
+	z-index: 10;
+	padding: 0.9rem 1rem 1rem;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 200ms var(--courbe);
+}
+
+body.info-ouverte #informations {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+body.info-ouverte .page { opacity: 0.12; }
+body.info-ouverte { overflow: hidden; }
+
+.info-rangee {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 1.2em;
+}
+
+.info-colonnes {
+	display: grid;
+	grid-template-columns: var(--colonne) 1fr;
+	gap: var(--gap);
+	align-items: start;
+}
+
+/* Le bloc de contact s'aligne sur la première colonne d'images. */
+.info-contact {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--gap);
+}
+
+.info-contact > * { grid-column: 1; }
+
+.espace { height: 1.2em; }
+
+/* --- apparition au défilement -------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+	.reveal {
+		opacity: 0;
+		transform: translateY(40px);
+		transition: opacity 700ms var(--courbe), transform 700ms var(--courbe);
+	}
+	.reveal.vu {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* --- mobile -------------------------------------------------------- */
+
+@media (max-width: 760px) {
+	:root { --base: 16px; }
+
+	.page {
+		grid-template-columns: 1fr;
+		row-gap: 1.8em;
+	}
+
+	.barre { position: static; }
+
+	.grille,
+	.entete,
+	.info-colonnes,
+	.info-contact {
+		grid-template-columns: 1fr;
+	}
+
+	.entete-meta { display: block; }
+
+	.entete-meta a { display: block; }
+
+	.pied {
+		position: static;
+		margin-top: 1.8em;
+	}
+
+	#informations {
+		overflow-y: auto;
+		background: var(--bg);
+	}
+
+	.info-colonnes { row-gap: 1.2em; }
+}
