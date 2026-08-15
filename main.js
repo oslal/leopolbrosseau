@@ -121,7 +121,7 @@ function htmlInfo(info) {
 		return "<p>" + echapper(p) + "</p>";
 	}).join("\n\t\t\t");
 
-	const adresse = info.adresse.map(function (l) {
+	const mesures = info.mesures.map(function (l) {
 		return "<div>" + echapper(l) + "</div>";
 	}).join("\n\t\t\t");
 
@@ -139,7 +139,7 @@ function htmlInfo(info) {
 		"\t\t\t" + texte,
 		"\t</div>",
 		'\t<div class="info-contact">',
-		"\t\t\t" + adresse,
+		"\t\t\t" + mesures,
 		'\t\t\t<div class="espace"></div>',
 		"\t\t\t" + contacts,
 		"\t</div>",

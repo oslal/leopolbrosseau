@@ -31,18 +31,21 @@ const SERIES = [
 	{ slug: "vitrine-industrielle", titre: "Vitrine industrielle", annee: 2026, categorie: "", images: 5,  vignette: 1 }
 ];
 
-/* Calque « Informations ». Chaque entrée de texte est un paragraphe.
-   Une entrée de contact sans href s'affiche en texte simple.            */
+/* Calque « Informations ».
+   texte     un paragraphe par entrée
+   mesures   lignes de la colonne de droite, au-dessus des contacts
+   contacts  une entrée sans href s'affiche en texte simple             */
 
 const INFO = {
 	texte: [
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dignissim magna, suspendisse facilisis sagittis sem sit amet tempor. Nam sit amet nibh et enim laoreet porta sit amet vel purus. Maecenas augue velit, feugiat in maximus id integer placerat massa nec tellus convallis aliquet.",
-		"Nam lobortis lectus mi, vel molestie neque dictum at vivamus sed sapien fermentum, fermentum metus ut, efficitur nunc. Praesent bibendum a elit non efficitur. Etiam et velit vitae quam aliquet fermentum, quisque sit amet nulla dictum tempus est.",
-		"Sed laoreet, magna eget mattis tincidunt, in lobortis mauris risus eu nunc. Vivamus sed condimentum leo. Nunc efficitur, magna condimentum gravida egestas, ligula mauris posuere neque, sit amet sagittis dui velit vitae neque."
+		"Salut, je m\u2019appelle L\u00e9opol. J\u2019ai commenc\u00e9 le mannequinat cette ann\u00e9e, \u00e0 Montr\u00e9al.",
+		"Je cherche \u00e0 travailler avec des photographes, des stylistes et des marques d\u2019ici, en studio comme en ext\u00e9rieur. Portrait, v\u00eatement, \u00e9ditorial, lookbook. Je n\u2019ai pas encore d\u2019agence, donc tout passe directement par moi.",
+		"Vous pouvez m\u2019\u00e9crire par courriel ou sur Instagram. Je r\u00e9ponds \u00e0 tout."
 	],
-	adresse: [
-		"Montréal, QC",
-		"Canada"
+	mesures: [
+		"175 cm / 5\u20329\u2033",
+		"68 kg / 150 lb",
+		"Montr\u00e9al, QC"
 	],
 	contacts: [
 		{ texte: "leopol.brosseau@gmail.com", href: "mailto:leopol.brosseau@gmail.com" },
