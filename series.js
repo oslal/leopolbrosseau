@@ -25,12 +25,11 @@ const SITE = {
    vignette  numéro de l'image utilisée sur l'index                        */
 
 const SERIES = [
-	{ slug: "marche-jean-talon",  titre: "Marché Jean-Talon",    annee: 2026, categorie: "Personnel", images: 8,  vignette: 1 },
-	{ slug: "rue-saint-viateur",  titre: "Rue Saint-Viateur",    annee: 2025, categorie: "Éditorial", images: 6,  vignette: 2 },
-	{ slug: "atelier-mile-end",   titre: "Atelier Mile-End",     annee: 2025, categorie: "Portrait",  images: 10, vignette: 1 },
-	{ slug: "bas-du-fleuve",      titre: "Bas-du-Fleuve",        annee: 2025, categorie: "Personnel", images: 7,  vignette: 3 },
-	{ slug: "studio-parc-ex",     titre: "Studio Parc-Extension", annee: 2024, categorie: "Commande",  images: 5,  vignette: 1 },
-	{ slug: "nuit-blanche",       titre: "Nuit blanche",         annee: 2024, categorie: "Éditorial", images: 9,  vignette: 4 }
+	{ slug: "cable-rouge",          titre: "Câble rouge",          annee: 2026, categorie: "", images: 11, vignette: 1 },
+	{ slug: "cage-d-escalier",      titre: "Cage d’escalier",      annee: 2026, categorie: "", images: 6,  vignette: 1 },
+	{ slug: "mur-de-brique",        titre: "Mur de brique",        annee: 2026, categorie: "", images: 6,  vignette: 1 },
+	{ slug: "portraits-simples",    titre: "Portraits simples",    annee: 2026, categorie: "", images: 3,  vignette: 1 },
+	{ slug: "vitrine-industrielle", titre: "Vitrine industrielle", annee: 2026, categorie: "", images: 5,  vignette: 1 }
 ];
 
 /* Calque « Informations ». Chaque entrée de texte est un paragraphe.
@@ -43,14 +42,12 @@ const INFO = {
 		"Sed laoreet, magna eget mattis tincidunt, in lobortis mauris risus eu nunc. Vivamus sed condimentum leo. Nunc efficitur, magna condimentum gravida egestas, ligula mauris posuere neque, sit amet sagittis dui velit vitae neque."
 	],
 	adresse: [
-		"1 rue Exemple",
-		"Montréal, QC H2T 1X1",
+		"Montréal, QC",
 		"Canada"
 	],
 	contacts: [
 		{ texte: "leopol@leopolbrosseau.ca", href: "mailto:leopol@leopolbrosseau.ca" },
-		{ texte: "@leopolbrosseau", href: "https://www.instagram.com/leopolbrosseau/" },
-		{ texte: "(514) 000-0000" }
+		{ texte: "@leopolbrosseau", href: "https://www.instagram.com/leopolbrosseau/" }
 	]
 };
 
