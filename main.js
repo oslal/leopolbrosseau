@@ -52,10 +52,13 @@ function htmlBarre(site, series, slugActif) {
 		return '<li><a href="' + echapper(l.href) + '"' + externe + ">" + echapper(l.texte) + "</a></li>";
 	}).join("\n\t\t\t");
 
+	const sousTitre = site.sousTitre
+		? '\n\t<div class="sous-titre">' + echapper(site.sousTitre) + "</div>"
+		: "";
+
 	return [
 		'<div class="bloc">',
-		'\t<a href="/" class="titre-site">' + echapper(site.titre) + "</a>",
-		'\t<div class="sous-titre">' + echapper(site.sousTitre) + "</div>",
+		'\t<a href="/" class="titre-site">' + echapper(site.titre) + "</a>" + sousTitre,
 		"</div>",
 		'<nav class="bloc" aria-label="Séries">',
 		"\t<ul>",
@@ -73,7 +76,7 @@ function htmlBarre(site, series, slugActif) {
 function htmlIndex(series) {
 	const cases = series.map(function (s, i) {
 		const src = cheminImage(s.slug, s.vignette || 1);
-		const prio = i < 2
+		const prio = i < 4
 			? ' fetchpriority="high" decoding="async"'
 			: ' loading="lazy" decoding="async"';
 		return '<a class="vignette reveal" href="/series/' + encodeURIComponent(s.slug) + '/">' +
@@ -169,6 +172,7 @@ function init() {
 	calque.innerHTML = htmlInfo(INFO);
 
 	brancherInfo(calque);
+	brancherOrientation();
 	brancherApparition();
 }
 
@@ -200,6 +204,22 @@ function brancherInfo(calque) {
 
 	window.addEventListener("hashchange", synchroniser);
 	synchroniser();
+}
+
+/* Les vignettes verticales sont recadrées en portrait plutôt qu'en
+   paysage. L'orientation est lue sur l'image elle-même, il n'y a donc
+   rien à déclarer dans series.js quand on change de vignette.          */
+function brancherOrientation() {
+	const images = document.querySelectorAll(".vignette img");
+	images.forEach(function (img) {
+		const marquer = function () {
+			if (img.naturalHeight > img.naturalWidth) {
+				img.parentElement.classList.add("portrait");
+			}
+		};
+		if (img.complete && img.naturalWidth) marquer();
+		else img.addEventListener("load", marquer, { once: true });
+	});
 }
 
 /* Fondu ascendant à l'entrée dans le cadre, comme le gabarit Cargo. */

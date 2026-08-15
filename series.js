@@ -6,12 +6,11 @@
 /* Identité et liens de la colonne de gauche. */
 const SITE = {
 	titre: "Léopol Brosseau",
-	sousTitre: "Photographie",
+	sousTitre: "",
 	copyright: "© Léopol Brosseau 2026",
 	liens: [
 		{ texte: "Informations", href: "#informations" },
-		{ texte: "Courriel", href: "mailto:leopol@leopolbrosseau.ca" },
-		{ texte: "Instagram", href: "https://www.instagram.com/leopolbrosseau/" }
+		{ texte: "Instagram", href: "https://www.instagram.com/lewooskayhh/" }
 	]
 };
 
@@ -46,8 +45,8 @@ const INFO = {
 		"Canada"
 	],
 	contacts: [
-		{ texte: "leopol@leopolbrosseau.ca", href: "mailto:leopol@leopolbrosseau.ca" },
-		{ texte: "@leopolbrosseau", href: "https://www.instagram.com/leopolbrosseau/" }
+		{ texte: "leopol.brosseau@gmail.com", href: "mailto:leopol.brosseau@gmail.com" },
+		{ texte: "@lewooskayhh", href: "https://www.instagram.com/lewooskayhh/" }
 	]
 };
 

@@ -112,13 +112,20 @@ p:last-child { margin-bottom: 0; }
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: var(--gap);
+	align-items: start;
 }
 
-/* Recadrage uniforme des vignettes. Retirer aspect-ratio et object-fit
-   pour laisser chaque vignette à ses proportions d'origine.            */
+/* Deux formats de recadrage seulement. Les vignettes horizontales
+   passent en 3:2, les verticales en 2:3, ce qui correspond au format
+   natif de la plupart des boîtiers : le rognage est quasi nul.
+   La classe .portrait est posée par main.js au chargement de l'image. */
 .vignette img {
 	aspect-ratio: 3 / 2;
 	object-fit: cover;
+}
+
+.vignette.portrait img {
+	aspect-ratio: 2 / 3;
 }
 
 /* --- page de série ------------------------------------------------ */
