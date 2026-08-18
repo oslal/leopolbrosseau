@@ -20,15 +20,18 @@ const SITE = {
    titre     ce qui s'affiche dans la liste et en tête de page
    annee     nombre
    categorie texte libre, peut rester vide ("")
-   images    nombre de fichiers dans /img/, numérotés 01 à n sans trou
-   vignette  numéro de l'image utilisée sur l'index                        */
+   images    nombre d'images de la série, numérotées 01 à n sans trou
+
+   Chaque dossier /img/ contient en plus un 00.webp : c'est la vignette
+   affichée sur l'index. Elle ne compte pas dans « images » et n'appa-
+   raît pas sur la page de la série.                                      */
 
 const SERIES = [
-	{ slug: "cable-rouge",          titre: "Câble rouge",          annee: 2026, categorie: "", images: 11, vignette: 1 },
-	{ slug: "cage-d-escalier",      titre: "Cage d’escalier",      annee: 2026, categorie: "", images: 6,  vignette: 1 },
-	{ slug: "mur-de-brique",        titre: "Mur de brique",        annee: 2026, categorie: "", images: 6,  vignette: 1 },
-	{ slug: "portraits-simples",    titre: "Portraits simples",    annee: 2026, categorie: "", images: 3,  vignette: 1 },
-	{ slug: "vitrine-industrielle", titre: "Vitrine industrielle", annee: 2026, categorie: "", images: 5,  vignette: 1 }
+	{ slug: "cable-rouge",          titre: "Câble rouge",          annee: 2026, categorie: "", images: 11 },
+	{ slug: "cage-d-escalier",      titre: "Cage d’escalier",      annee: 2026, categorie: "", images: 6 },
+	{ slug: "mur-de-brique",        titre: "Mur de brique",        annee: 2026, categorie: "", images: 6 },
+	{ slug: "portraits-simples",    titre: "Portraits simples",    annee: 2026, categorie: "", images: 3 },
+	{ slug: "vitrine-industrielle", titre: "Vitrine industrielle", annee: 2026, categorie: "", images: 5 }
 ];
 
 /* Calque « Informations ».

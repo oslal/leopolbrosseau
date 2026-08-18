@@ -34,6 +34,25 @@ function slugDepuisChemin(chemin) {
 	return decodeURIComponent(s);
 }
 
+/* Liste [1, 2, ... n]. */
+function sequence(n) {
+	const a = [];
+	for (let i = 1; i <= n; i++) a.push(i);
+	return a;
+}
+
+/* Mélange de Fisher-Yates, sur une copie. */
+function melanger(liste) {
+	const a = liste.slice();
+	for (let i = a.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		const t = a[i];
+		a[i] = a[j];
+		a[j] = t;
+	}
+	return a;
+}
+
 function trouverSerie(series, slug) {
 	return series.find(function (s) { return s.slug === slug; }) || null;
 }
@@ -75,7 +94,7 @@ function htmlBarre(site, series, slugActif) {
 
 function htmlIndex(series) {
 	const cases = series.map(function (s, i) {
-		const src = cheminImage(s.slug, s.vignette || 1);
+		const src = cheminImage(s.slug, 0);
 		const prio = i < 4
 			? ' fetchpriority="high" decoding="async"'
 			: ' loading="lazy" decoding="async"';
@@ -86,16 +105,19 @@ function htmlIndex(series) {
 	return '<div class="grille">\n\t' + cases + "\n</div>";
 }
 
-function htmlSerie(serie) {
+/* L'ordre des images est retiré au hasard à chaque chargement. Passer
+   un tableau en second argument fige l'ordre, ce dont se servent les
+   tests. La vignette 00 ne fait pas partie de la suite.               */
+function htmlSerie(serie, ordre) {
+	const suite = ordre || melanger(sequence(serie.images));
 	const meta = [serie.categorie, serie.annee].filter(Boolean).join(", ");
-	const images = [];
-	for (let n = 1; n <= serie.images; n++) {
-		const prio = n === 1
+	const images = suite.map(function (n, rang) {
+		const prio = rang === 0
 			? ' fetchpriority="high" decoding="async"'
 			: ' loading="lazy" decoding="async"';
-		images.push('<img class="reveal" src="' + cheminImage(serie.slug, n) +
-			'" alt="' + echapper(serie.titre) + ", image " + n + '"' + prio + ">");
-	}
+		return '<img class="reveal" src="' + cheminImage(serie.slug, n) +
+			'" alt="' + echapper(serie.titre) + ", image " + n + '"' + prio + ">";
+	});
 
 	return [
 		'<header class="entete">',
@@ -251,6 +273,7 @@ if (typeof document !== "undefined") {
 if (typeof module !== "undefined") {
 	module.exports = {
 		echapper, numero, cheminImage, slugDepuisChemin, trouverSerie,
+		sequence, melanger,
 		htmlBarre, htmlIndex, htmlSerie, htmlInfo, htmlIntrouvable
 	};
 }
