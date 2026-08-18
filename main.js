@@ -194,7 +194,6 @@ function init() {
 	calque.innerHTML = htmlInfo(INFO);
 
 	brancherInfo(calque);
-	brancherOrientation();
 	brancherApparition();
 }
 
@@ -226,22 +225,6 @@ function brancherInfo(calque) {
 
 	window.addEventListener("hashchange", synchroniser);
 	synchroniser();
-}
-
-/* Les vignettes verticales sont recadrées en portrait plutôt qu'en
-   paysage. L'orientation est lue sur l'image elle-même, il n'y a donc
-   rien à déclarer dans series.js quand on change de vignette.          */
-function brancherOrientation() {
-	const images = document.querySelectorAll(".vignette img");
-	images.forEach(function (img) {
-		const marquer = function () {
-			if (img.naturalHeight > img.naturalWidth) {
-				img.parentElement.classList.add("portrait");
-			}
-		};
-		if (img.complete && img.naturalWidth) marquer();
-		else img.addEventListener("load", marquer, { once: true });
-	});
 }
 
 /* Fondu ascendant à l'entrée dans le cadre, comme le gabarit Cargo. */
